@@ -3,25 +3,49 @@
 
 <%= form_with method: :get do |form| %>
   <div>
-    <%= form.collection_select :departure_airport_id, Airport.order(:code), :id, :code %>
-    <%= form.label :departure_airport_id, "Select departure airport" %>
+    <%= form.collection_select :departure_code, Airport.order(:code), :code, :code %>
+    <%= form.label :departure_code, "Select departure airport." %>
   </div>
 
   <div>
-    <%= form.collection_select :arrival_airport_id, Airport.order(:code), :id, :code %>
-    <%= form.label :arrival_airport_id, "Select arrival airport" %>
+    <%= form.collection_select :arrival_code, Airport.order(:code), :code, :code %>
+    <%= form.label :arrival_code, "Select arrival airport." %>
   </div>
 
   <div>
-    <%= form.select :passengers, %w[1 2 3 4] %>
-    <%= form.label :passengers, "Select passenger number" %>
+    <%= form.select :passenger_num, %w[1 2 3 4] %>
+    <%= form.label :passenger_num, "Select passenger number." %>
   </div>
 
   <div>
-    <%= form.collection_select :flight_date, @flights.order(:start), :id, :flight_date_formatted %>
+    <%= form.collection_select :flight_date, @flights.order(:start).uniq(&:flight_date_formatted), :flight_date_formatted, :flight_date_formatted %>
+    <%= form.label :flight_date, "Select flight date." %>
   </div>
 
   <div>
     <%= form.submit "Search flight" %>
   </div>
+<% end %>
+
+selected passenger number: <%= @passenger_num %>
+
+<% if params[:passenger_num].present? %>
+  <%= form_with url: new_flight_path, method: :get do |form| %>
+    Matching flights: <br>
+    <% @flight_search_results.each do |flight| %>
+      <%= form.radio_button :flight, flight.id %>
+      <%= form.label "flight_id_#{flight.id}", "from: #{flight.departure_airport.code} to: #{flight.arrival_airport.code} date time: #{flight.start}"%>
+      <br>
+    <% end %>
+
+    <%= form.hidden_field :passenger_num, value: @passenger_num %>
+
+    <% if @flight_search_results.empty? %>
+      No search results found
+    <% else %>
+      <div>
+        <%= form.submit "Choose flight" %>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
