@@ -27,9 +27,8 @@
   </div>
 <% end %>
 
-selected passenger number: <%= @passenger_num %>
-
 <% if params[:passenger_num].present? %>
+  selected passenger number: <%= @passenger_num %>
   <%= form_with url: new_flight_path, method: :get do |form| %>
     Matching flights: <br>
     <% @flight_search_results.each do |flight| %>
