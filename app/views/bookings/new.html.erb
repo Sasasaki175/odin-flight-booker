@@ -1,0 +1,15 @@
+<h1>Bookings#new</h1>
+<p>Find me in app/views/bookings/new.html.erb</p>
+
+<p>
+  Booking flight: <br>
+  Date: <%= @flight.flight_date_formatted %><br>
+  Departure: <%= @flight.departure_airport.code %><br>
+  Arrival: <%= @flight.arrival_airport.code %><br>
+  Flight id: <%= @flight.id %>
+</p>
+
+<%= form_with model: @booking do |form| %>
+
+
+<% end %>

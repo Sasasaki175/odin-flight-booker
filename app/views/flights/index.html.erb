@@ -27,9 +27,10 @@
   </div>
 <% end %>
 
+<!-- Show search result only if the :passenger_num param exists -->
 <% if params[:passenger_num].present? %>
   selected passenger number: <%= @passenger_num %>
-  <%= form_with url: new_flight_path, method: :get do |form| %>
+  <%= form_with url: new_booking_path, method: :get do |form| %>
     Matching flights: <br>
     <% @flight_search_results.each do |flight| %>
       <%= form.radio_button :flight, flight.id %>
@@ -43,7 +44,7 @@
       No search results found
     <% else %>
       <div>
-        <%= form.submit "Choose flight" %>
+        <%= form.submit "Book flight" %>
       </div>
     <% end %>
   <% end %>

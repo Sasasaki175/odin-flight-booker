@@ -1,6 +1,4 @@
 class FlightsController < ApplicationController
-  before_action :set_flight
-
   def index
     @flights = Flight.all
 
@@ -13,10 +11,6 @@ class FlightsController < ApplicationController
   end
 
   def create
-    
-  end
-
-  def set_flight
     
   end
 end
