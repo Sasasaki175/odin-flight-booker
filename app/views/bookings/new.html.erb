@@ -9,7 +9,12 @@
   Flight id: <%= @flight.id %>
 </p>
 
-<%= form_with model: @booking do |form| %>
-
-
+<%= form_with model: @booking do |booking_form| %>
+  <%= booking_form.hidden_field :flight_id, value: @flight.id %>
+  <%= booking_form.fields_for :passengers do |passenger_form| %>
+    name: <%= passenger_form.text_field :name %>
+    email: <%= passenger_form.text_field :email %>
+    <br>
+  <% end %>
+  <%= booking_form.submit "Submit passenger info" %>
 <% end %>

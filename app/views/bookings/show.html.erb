@@ -1,0 +1,20 @@
+<div>Booking id: <%= @booking.id %></div>
+
+<div>Flight: </div>
+<div>
+  Flight id: <%= @booking.flight.id %>
+  Departure: <%= @booking.flight.departure_airport.code %>
+  Arrival: <%= @booking.flight.arrival_airport.code %>
+  Date time: <%= @booking.flight.start %>
+</div>
+
+<div>Passengers:</div>
+<div>
+  <% @booking.passengers.each do |passenger| %>
+    Name: <%= passenger.name %>
+    Email: <%= passenger.email %>
+    <br>
+  <% end %>
+</div>
+<br>
+<%= link_to "Home", root_path %>
