@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
 
     respond_to do |format|
       if @booking.save
-        format.html { redirect_to @booking, notice: "Flight successfully booked."}
+        format.html { redirect_to @booking, notice: "Flight successfully booked." }
         format.json { render :show, status: :created, location: @booking }
       else
         format.html { redirect_to root_path, status: :unprocessable_entity }
@@ -30,6 +30,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.expect(booking: [ :flight_id, passengers_attributes: [[ :name, :email ]]])
+    params.expect(booking: [ :flight_id, passengers_attributes: [ [ :name, :email ] ] ])
   end
 end
